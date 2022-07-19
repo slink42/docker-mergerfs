@@ -3,7 +3,6 @@
 fuse_mountpoint=${MERGED_DEST:-/mnt/data}
 poolingfs=${POOLING_FS:-mergerfs}
 
-
 mfs_basic_opts="uid=${PUID:-911},gid=${PGID:-911},umask=022,allow_other"
 mfs_branches=${MFS_BRANCHES:-/mnt/local=RW:/mnt/cloud=NC}
 

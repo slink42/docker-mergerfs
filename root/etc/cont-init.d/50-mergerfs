@@ -9,7 +9,7 @@ if [ "$poolingfs" == "mergerfs" ]; then
         echo "Retrying in 30s ..."
         sleep 30s
     done
-    fs_branches = ${mfs_branches}
+    fs_branches=${mfs_branches}
 fi
 
 if [ "$poolingfs" == "unionfs" ]; then
@@ -20,7 +20,7 @@ if [ "$poolingfs" == "unionfs" ]; then
         echo "Retrying in 30s ..."
         sleep 30s
     done
-    fs_branches = ${ufs_branches}
+    fs_branches=${ufs_branches}
 fi
 
 # check all folders required by mount branch config in mfs_branches/ufs_branches exist
