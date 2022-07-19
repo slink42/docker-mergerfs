@@ -1,5 +1,7 @@
 # docker-rclone
 
+[![buildx](https://github.com/slink42/docker-mergerfs/actions/workflows/buildx.yml/badge.svg?branch=master)](https://github.com/slink42/docker-mergerfs/actions/workflows/buildx.yml)
+
 Docker image for pooling filesystem [mergerfs](https://github.com/trapexit/mergerfs/) mount or [unionfs](https://github.com/rpodgorny/unionfs-fuse/) mount, with
 
 - Ubuntu 20.04
