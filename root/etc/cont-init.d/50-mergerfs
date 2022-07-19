@@ -21,6 +21,9 @@ if [ "$poolingfs" == "unionfs" ]; then
     done
 fi
 
+# make sure mountpoint dir exists
+mkdir -p ${fuse_mountpoint}
+
 # permissions
 chown -R abc:abc \
     /mnt ${fuse_mountpoint}
