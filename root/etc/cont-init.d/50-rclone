@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv bash
-. /usr/local/bin/variables
-
-echo "rclone init script removed"
