@@ -113,9 +113,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASS }}
           repository: ${{ env.IMAGE_NAME }}
           short-description: ${{ steps.vars.outputs.github_desc }}
-      -
-        name: Notification
-        uses: syanzay/notify-telegram@v0.1.0
+      - 
+        name: Notify Telegram
+        uses: yanzay/notify-telegram@v0.1.0
         if: env.X_SKIP == 'false' && always() && github.actor == github.event.repository.owner.login
         with:
           chat: ${{ secrets.TELEGRAM_CHAT }} # user id or channel name secret
@@ -196,9 +196,9 @@ jobs:
           build-args: |
             RCLONE_TYPE=${{ matrix.rclone-type }}
           push: true
-      -
-        name: Notification
-        uses: syanzay/notify-telegram@v0.1.0
+      - 
+        name: Notify Telegram
+        uses: yanzay/notify-telegram@v0.1.0
         if: env.X_SKIP == 'false' && always() && github.actor == github.event.repository.owner.login
         with:
           chat: ${{ secrets.TELEGRAM_CHAT }} # user id or channel name secret
