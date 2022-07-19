@@ -17,10 +17,7 @@ services:
     restart: always
     network_mode: "bridge"
     volumes:
-      - ${DOCKER_ROOT}/mergerfs/config:/config
-      - ${DOCKER_ROOT}/mergerfs/log:/log
-      - ${DOCKER_ROOT}/mergerfs/cache:/cache
-      - /your/mounting/point:/mnt:rshared
+      - /your/mount/points/parent/folder:/mnt:rshared
     devices:
       - /dev/fuse
     cap_add:
@@ -39,18 +36,14 @@ equivalently,
 
 ```bash
 docker run -d \
-    --name=rclone \
+    --name=mergerfs \
     --cap-add SYS_ADMIN \
     --device /dev/fuse \
     --security-opt apparmor=unconfined \
-    -v ${DOCKER_ROOT}/rclone/config:/config \
-    -v ${DOCKER_ROOT}/rclone/log:/log \
-    -v ${DOCKER_ROOT}/rclone/cache:/cache \
-    -v /your/mounting/point:/data:shared \
-    -v /local/dir/to/be/merged/with:/local \
+    -v /your/mount/points/parent/folder:/mnt:shared \
     -e PUID=${PUID} \
     -e PGID=${PGID} \
-    -e TZ=Asia/Seoul \
+    -e TZ=Australia/Melbourne \
     -e MERGED_DEST=/mnt/data \
     -e MFS_BRANCHES:/mnt/local1=RW:/mnt/local12=NC \
     slink42/mergerfs
@@ -129,24 +122,6 @@ where a default value of ```UFS_USER_OPTS``` is
 ```bash
 UFS_USER_OPTS="cow,direct_io,nonempty,auto_cache,sync_read"
 ```
-
-### Built-in scripts
-
-Two scripts performing basic rclone operations such as copy and move between ```/local``` and ```/cloud``` are prepared for your conveinence. Since they are from local to cloud directories, it is meaningful only when you mount an additional ```/local``` directory.
-
-#### copy_local
-
-You can make a copy of files in ```/local``` to ```/cloud``` by
-
-```bash
-docker exec -it <container name or sha1, e.g. rclone> copy_local
-```
-
-If you want to exclude a certain folder from copy, just put an empty ```.nocopy``` file on the folder root. Then, the script will ignore the sub-tree from the operation.
-
-#### move_local
-
-In contrast to ```copy_local```, ```move_local``` consists of three consecutive sub-operations. First, it will move old files. If ```MOVE_LOCAL_AFTER_DAYS``` is set, files older than that days will be moved. Then, it will move files exceed size of ```MOVE_LOCAL_EXCEEDS_GB``` by the amount of ```MOVE_LOCAL_FREEUP_GB```. Finally, it will move the rest of files in ```/local``` only if ```MOVE_LOCAL_ALL=true```. The command and the way to exclude subfolders are almost the same as for ```copy_local```.
 
 #### cron - disabled by default
 

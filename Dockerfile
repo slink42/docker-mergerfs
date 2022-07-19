@@ -40,8 +40,8 @@ ADD https://raw.githubusercontent.com/by275/docker-base/main/_/etc/cont-init.d/w
 # RELEASE
 # 
 FROM ubuntu
-LABEL maintainer="wiserain"
-LABEL org.opencontainers.image.source https://github.com/wiserain/docker-rclone
+LABEL maintainer="slink42"
+LABEL org.opencontainers.image.source https://github.com/slink42/docker-mergerfs
 
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG APT_MIRROR="archive.ubuntu.com"
