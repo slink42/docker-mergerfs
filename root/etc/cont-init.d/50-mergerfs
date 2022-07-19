@@ -9,6 +9,7 @@ if [ "$poolingfs" == "mergerfs" ]; then
         echo "Retrying in 30s ..."
         sleep 30s
     done
+    fs_branches = ${mfs_branches}
 fi
 
 if [ "$poolingfs" == "unionfs" ]; then
@@ -19,11 +20,19 @@ if [ "$poolingfs" == "unionfs" ]; then
         echo "Retrying in 30s ..."
         sleep 30s
     done
+    fs_branches = ${ufs_branches}
 fi
 
-# make sure mountpoint dir exists
-mkdir -p ${fuse_mountpoint}
+# setup mount folders
+for branch in ${fs_branches/:/ } ${fuse_mountpoint}
+do 
+    required_dir=${branch/=*}
 
-# permissions
-chown -R abc:abc \
-    /mnt ${fuse_mountpoint}
+    # make sure mountpoint dir exists
+    [[ -d ${required_dir} ]] || echo "Warning - dir required by mergerfs is missing. Creating empty dir for ${required_dir}"
+    mkdir -p ${required_dir}
+    
+    # permissions
+    chown abc:abc ${required_dir}
+done
+
