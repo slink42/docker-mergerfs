@@ -201,9 +201,6 @@ jobs:
             RCLONE_TYPE=${{ matrix.rclone-type }}
           push: true
       -
-      yanzay/notify-telegram@v0.1.0
-
-
         name: Notification
         uses: syanzay/notify-telegram@v0.1.0
         if: env.X_SKIP == 'false' && always() && github.actor == github.event.repository.owner.login
