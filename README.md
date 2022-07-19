@@ -31,7 +31,7 @@ services:
       - PGID=${PGID}
       - TZ=Australia/Sydney
       - MERGED_DEST=/mnt/data
-      - MFS_BRANCHES:/mnt/local=RW:/mnt/cloud=NC
+      - MFS_BRANCHES=/mnt/local1=NC:/mnt/local12=NC:/mnt/local13=NC
 ```
 
 equivalently,
@@ -47,7 +47,7 @@ docker run -d \
     -e PGID=${PGID} \
     -e TZ=Australia/Sydney \
     -e MERGED_DEST=/mnt/data \
-    -e MFS_BRANCHES:/mnt/local1=NC:/mnt/local12=NC:/mnt/local13=NC \
+    -e MFS_BRANCHES=/mnt/local1=NC:/mnt/local12=NC:/mnt/local13=NC \
     slink42/mergerfs
 ```
 

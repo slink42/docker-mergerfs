@@ -23,4 +23,4 @@ fi
 
 # permissions
 chown -R abc:abc \
-    /config /log /cloud /data ${fuse_mountpoint}
+    /mnt ${fuse_mountpoint}
