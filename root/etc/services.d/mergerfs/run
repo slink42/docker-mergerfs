@@ -10,7 +10,7 @@ fi
 if [ "$poolingfs" == "unionfs" ]; then
     echo "$(date) - starting unionfs"
     IFS=" " read -r -a ufs_user_opts <<< "$UFS_USER_OPTS"
-    # need to find real option instead of -f to keep unionfs open in console instead of in a new thread
+    # need to confirm -f is option to keep unionfs open in console instead of in a new thread
     mount_command="unionfs -f ${ufs_branches} ${fuse_mountpoint} -o ${ufs_basic_opts} -o ${ufs_user_opts}"
 fi
 
