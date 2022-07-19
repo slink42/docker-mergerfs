@@ -4,13 +4,14 @@
 if [ "$poolingfs" == "mergerfs" ]; then
     echo "$(date) - starting mergerfs"
     IFS=" " read -r -a mfs_user_opts <<< "$MFS_USER_OPTS"
-    mount_command="mergerfs ${mfs_branches} ${fuse_mountpoint} -o ${mfs_basic_opts} -o ${mfs_user_opts}"
+    mount_command="mergerfs -f ${mfs_branches} ${fuse_mountpoint} -o ${mfs_basic_opts} -o ${mfs_user_opts}"
 fi
 
 if [ "$poolingfs" == "unionfs" ]; then
     echo "$(date) - starting unionfs"
     IFS=" " read -r -a ufs_user_opts <<< "$UFS_USER_OPTS"
-    mount_command="unionfs ${ufs_branches} ${fuse_mountpoint} -o ${ufs_basic_opts} -o ${ufs_user_opts}"
+    # need to find real option instead of -f to keep unionfs open in console instead of in a new thread
+    mount_command="unionfs -f ${ufs_branches} ${fuse_mountpoint} -o ${ufs_basic_opts} -o ${ufs_user_opts}"
 fi
 
 [ -z "$mount_command" ] && echo "error: emtpy mount_command" && exit 1

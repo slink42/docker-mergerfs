@@ -23,8 +23,20 @@ if [ "$poolingfs" == "unionfs" ]; then
     fs_branches = ${ufs_branches}
 fi
 
-# setup mount folders
-for branch in ${fs_branches/:/ } ${fuse_mountpoint}
+# check all folders required by mount branch config in mfs_branches/ufs_branches exist
+for branch in ${fs_branches/:/ }
+do 
+    required_dir=${branch/=*}
+
+    # make sure mountpoint dir exists
+    if [[ -d ${required_dir} ]]; then
+        echo "Error - directory required by ${poolingfs} is missing: ${required_dir}"
+        exit 1
+    fi
+done
+
+# setup fuse_mountpoint folder
+for branch in ${fuse_mountpoint}
 do 
     required_dir=${branch/=*}
 
@@ -35,4 +47,5 @@ do
     # permissions
     chown abc:abc ${required_dir}
 done
+
 
