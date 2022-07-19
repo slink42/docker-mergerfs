@@ -76,13 +76,16 @@ Here is the internal command for mergerfs mount.
 mergerfs \
     -o uid=${PUID:-911},gid=${PGID:-911},umask=022,allow_other \
     -o ${MFS_USER_OPTS} \
-    /local=RW:/cloud=NC /data
+    /mnt/local=RW:/mnt/cloud=NC ${MERGED_DEST}
 ```
+
 where a default value of ```MFS_USER_OPTS``` is
 
 ```bash
 MFS_USER_OPTS="rw,use_ino,func.getattr=newest,category.action=all,category.create=ff,cache.files=auto-full,dropcacheonclose=true"
 ```
+
+and the default value of ```MERGED_DEST``` is ```/mnt/data```
 
 Please note that variables only with capital letters are configurable by environment variables. Also, be aware that rc is enabled by default.
 
@@ -101,14 +104,16 @@ If you want unionfs instead of mergerfs, set ```POOLING_FS=unionfs```, which wil
 unionfs \
     -o uid=${PUID:-911},gid=${PGID:-911},umask=022,allow_other \
     -o ${UFS_USER_OPTS} \
-    /local=RW:/cloud=RO /data
+    /mnt/local=RW:/mnt/cloud=RO ${MERGED_DEST}
 ```
 
-where a default value of ```UFS_USER_OPTS``` is
+where the default value of ```UFS_USER_OPTS``` is
 
 ```bash
 UFS_USER_OPTS="cow,direct_io,nonempty,auto_cache,sync_read"
 ```
+
+and the default value of ```MERGED_DEST``` is ```/mnt/data```
 
 
 ## Credit
