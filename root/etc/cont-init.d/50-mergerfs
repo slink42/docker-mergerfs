@@ -30,6 +30,7 @@ do
 
     # make sure fs branch folder exists to use as a source
     if ! [[ -d ${required_dir} ]]; then
+        ls -la /mnt
         echo "Error - directory required by ${poolingfs} is missing: ${required_dir}"
         exit 1
     fi
