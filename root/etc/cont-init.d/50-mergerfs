@@ -28,8 +28,8 @@ for branch in ${fs_branches/:/ }
 do 
     required_dir=${branch/=*}
 
-    # make sure mountpoint dir exists
-    if [[ -d ${required_dir} ]]; then
+    # make sure fs branch folder exists to use as a source
+    if ! [[ -d ${required_dir} ]]; then
         echo "Error - directory required by ${poolingfs} is missing: ${required_dir}"
         exit 1
     fi
