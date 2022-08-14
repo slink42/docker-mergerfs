@@ -1,6 +1,8 @@
 #!/usr/bin/with-contenv bash
 . /usr/local/bin/variables
 
+sleep 10
+
 if [ "$poolingfs" == "mergerfs" ]; then
     echo "*** checking mergerfs mountpoint: ${fuse_mountpoint}"
     while findmnt "${fuse_mountpoint}" | grep -q fuse.mergerfs; do
