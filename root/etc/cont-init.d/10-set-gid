@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+if ! [ -z "${PUID}" ] && ! [ -z "${PGID}" ]; then
+    echo "updating group id for user abc (uid: ${PUID}) to: ${PGID}"
+    usermod -u "${PUID}" -g "${PGID}" abc
+fi
