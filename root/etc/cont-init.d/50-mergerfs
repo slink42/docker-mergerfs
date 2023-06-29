@@ -26,7 +26,7 @@ if [ "$poolingfs" == "unionfs" ]; then
 fi
 
 # check all folders required by mount branch config in mfs_branches/ufs_branches exist
-for branch in ${fs_branches/:/ }
+for branch in $(echo $fs_branches |  tr : " ")
 do 
     required_dir=${branch/=*}
 
